@@ -3,8 +3,8 @@ import os
 from dotenv import load_dotenv
 from psycopg2 import OperationalError
 
-from bd_utils import clear_data, create_database, create_tables, fill_data
-from DBManager import DBManager
+from src.bd_utils import clear_data, create_database, create_tables, fill_data
+from src.DBManager import DBManager
 
 
 def user_interact() -> None:

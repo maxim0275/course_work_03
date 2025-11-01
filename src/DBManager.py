@@ -4,7 +4,7 @@ from typing import List, Optional, Tuple
 import psycopg2
 from dotenv import load_dotenv
 
-from bd_utils import config
+from src.bd_utils import config
 
 
 class DBManager:

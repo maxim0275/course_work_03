@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
-from cls_HHAPI import HHConnectAPI
-from utils import get_currency_rate
+from src.cls_HHAPI import HHConnectAPI
+from src.utils import get_currency_rate
 
 
 class GetVacAPI(ABC):

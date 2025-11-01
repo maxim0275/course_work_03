@@ -5,7 +5,7 @@ import psycopg2
 from dotenv import load_dotenv
 from psycopg2 import sql
 
-from cls_GetData import GetEmployerData, HeadHunterHAPI
+from src.cls_GetData import GetEmployerData, HeadHunterHAPI
 
 
 def config(filename="database.ini", section="postgresql"):
