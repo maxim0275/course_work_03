@@ -55,7 +55,11 @@ def user_interact() -> None:
             print(user_actions[1])
             load_dotenv()
             database_name = os.getenv("database_name")
-            db.close()
+            try:
+                db.close()
+            except:
+                "Нет соединения с баздой данных hh_data"
+
             create_database(database_name)
             create_tables(database_name)
             try:

@@ -13,8 +13,11 @@ class DBManager:
         name_database = os.getenv("database_name")
 
         params = config()
-        self.connection = psycopg2.connect(dbname=name_database, **params)
-        self.cursor = self.connection.cursor()
+        try:
+            self.connection = psycopg2.connect(dbname=name_database, **params)
+            self.cursor = self.connection.cursor()
+        except:
+            print(f"База данных {name_database} не существует.")
 
     def get_companies_and_vacancies_count(self) -> List[Tuple[int, str, int]]:
         query = """
@@ -50,7 +53,7 @@ class DBManager:
         return self.cursor.fetchone()[0]  # Возвращаем только одно значение
 
     def get_vacancies_with_higher_salary(
-        self,
+            self,
     ) -> List[Tuple[int, str, str, Optional[float]]]:
         avg_salary = self.get_avg_salary()
         query = """
@@ -63,7 +66,7 @@ class DBManager:
         return self.cursor.fetchall()
 
     def get_vacancies_with_keyword(
-        self, keyword: str
+            self, keyword: str
     ) -> List[Tuple[int, str, str, Optional[float]]]:
         query = """
         SELECT v.id, e.name AS company_name, v.name_vacancy, v.salary
@@ -75,18 +78,8 @@ class DBManager:
         return self.cursor.fetchall()
 
     def close(self) -> None:
-        self.cursor.close()
-        self.connection.close()
-
-
-# Пример использования
-# if __name__ == "__main__":
-# db = DBManager()
-
-# print(db.get_companies_and_vacancies_count())
-# print(db.get_all_vacancies())
-# print(db.get_avg_salary())
-# print(db.get_vacancies_with_higher_salary())
-# print(db.get_vacancies_with_keyword('специалист'))
-
-# db.close()
+        try:
+            self.cursor.close()
+            self.connection.close()
+        except:
+            print('Соединение не установлено')
