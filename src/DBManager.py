@@ -82,4 +82,4 @@ class DBManager:
             self.cursor.close()
             self.connection.close()
         except:
-            print('Соединение не установлено')
+            print('Соединение не  установлено')
