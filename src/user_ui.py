@@ -3,8 +3,8 @@ import os
 from dotenv import load_dotenv
 from psycopg2 import OperationalError
 
-from bd_utils import clear_data, create_database, create_tables, fill_data
-from DBManager import DBManager
+from src.bd_utils import clear_data, create_database, create_tables, fill_data
+from src.DBManager import DBManager
 
 
 def user_interact() -> None:
@@ -45,7 +45,7 @@ def user_interact() -> None:
         print(user_actions[9])
         print("===============================================================")
         print("Текущие условия:")
-        print(f"Фильтр для отбора по ключевому слову: {cond_keyword}")
+        print(f"Фильтр для отбора по  ключевому слову: {cond_keyword}")
         print("===============================================================")
         print("Ожидается ввод пользователя: (1 .. 8): ____")
 
@@ -55,7 +55,11 @@ def user_interact() -> None:
             print(user_actions[1])
             load_dotenv()
             database_name = os.getenv("database_name")
-            db.close()
+            try:
+                db.close()
+            except:
+                "Нет соединения с баздой данных hh_data"
+
             create_database(database_name)
             create_tables(database_name)
             try:
